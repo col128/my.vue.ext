@@ -8,25 +8,18 @@
 <body>
 
     <div id="app">
-        {{message}}
-        <input type="text" v-model="message">
-        <div v-if="seen">have you see me in here</div>
         <ul>
-            <li v-for="todo in todos">
-                {{todo.text}}
-            </li>
-
+            <todo-item v-for="item in todos" v-bind:todo="item"></todo-item>
         </ul>
-        <button v-on:click="reverseMessage">reverse.message</button>
-
-
     </div>
 <script>
+    Vue.component("todo-item",{
+        props:['todo'],
+        template:'<li>{{todo.text}}</li>'
+    })
     var app = new Vue({
         el: '#app',
         data: {
-            message: 'Hello Vue!',
-            seen:true,
             todos:[
                 { text: 'Learn JavaScript' },
                 { text: 'Learn Vue' },
